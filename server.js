@@ -18,7 +18,7 @@ mongoose
     })
 
 
-app.listen(PORT, 'localhost', (error) => {
+app.listen(process.env.PORT || 5000, '0.0.0.0', (error) => {
     error ? console.log(error) : console.log(`listening port ${PORT}`)
 })
 
