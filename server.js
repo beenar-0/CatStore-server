@@ -4,7 +4,7 @@ const app = express()
 const config = require('config')
 require('dotenv').config()
 const db = process.env.MONGO_URL
-const PORT = process.env.PORT || config.get('serverPort')
+const PORT = process.env.PORT || 5000
 const Cat = require('./models/Cat')
 const Order = require('./models/Order')
 
