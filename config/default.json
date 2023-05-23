@@ -1,0 +1,4 @@
+{
+  "serverPort" : 3001,
+  "dbUrl": "mongodb+srv://FakeDivine:FakeDivine@beenar.wwyprp7.mongodb.net/CatStore?retryWrites=true&w=majority"
+}
