@@ -21,7 +21,7 @@ const postSchema = new Schema({
         type: String,
         required: false
     },
-    cats:{
+    dosimeters:{
         type: Object,
         required: true
     }

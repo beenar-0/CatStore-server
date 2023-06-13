@@ -27,6 +27,6 @@ const postSchema = new Schema({
     }
 })
 
-const Cat = mongoose.model('Cat', postSchema)
+const Dosimeter = mongoose.model('Dosimeter', postSchema)
 
-module.exports = Cat
+module.exports = Dosimeter

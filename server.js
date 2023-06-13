@@ -1,11 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
-const config = require('config')
 require('dotenv').config()
 const db = process.env.MONGO_URL
-const PORT = process.env.PORT || 5000
-const Cat = require('./models/Cat')
+const PORT = process.env.PORT || 3001
+const Dosimeter = require('./models/Dosimeter')
 const Order = require('./models/Order')
 
 mongoose
@@ -38,7 +37,7 @@ app.use(express.json({
 
 
 app.get('/get-all', (req, res) => {
-    Cat
+    Dosimeter
         .find()
         .then((cat) => {
             return res.send(JSON.stringify(cat))
@@ -49,9 +48,9 @@ app.get('/get-all', (req, res) => {
         })
 })
 
-app.post('/add-cat', (req, res) => {
+app.post('/add-dosimeter', (req, res) => {
     const {name, description, price, type, img} = req.body
-    const post = new Cat({name, description, price, type, img})
+    const post = new Dosimeter({name, description, price, type, img})
     post
         .save()
         .then((result) => {
@@ -64,8 +63,8 @@ app.post('/add-cat', (req, res) => {
 })
 
 
-app.post('/delete-cat', (req, res) => {
-    Cat
+app.post('/delete-dosimeter', (req, res) => {
+    Dosimeter
         .findByIdAndRemove({_id: req.body.id})
         .then((result) => {
             return res.send(result)
@@ -77,9 +76,9 @@ app.post('/delete-cat', (req, res) => {
 })
 
 
-app.post('/edit-cat', (req, res) => {
+app.post('/edit-dosimeter', (req, res) => {
     const post = req.body.post
-    Cat.findByIdAndUpdate(req.body.postId, {
+    Dosimeter.findByIdAndUpdate(req.body.postId, {
         name: post.name,
         description: post.description,
         price: post.price,
@@ -96,8 +95,8 @@ app.post('/edit-cat', (req, res) => {
 })
 
 app.post('/order', (req, res) => {
-    const {name, address, email, phoneNumber, cats} = req.body
-    const order = new Order({name, address, email, phoneNumber, cats})
+    const {name, address, email, phoneNumber, dosimeters} = req.body
+    const order = new Order({name, address, email, phoneNumber, dosimeters})
     order
         .save()
         .then((result) => {
@@ -109,9 +108,9 @@ app.post('/order', (req, res) => {
         })
 })
 
-app.get('/get-kind', (req, res) => {
-    Cat
-        .find({type: "kind"})
+app.get('/get-individual', (req, res) => {
+    Dosimeter
+        .find({type: "individual"})
         .then((response) => {
             return res.send(JSON.stringify(response))
         })
@@ -121,9 +120,9 @@ app.get('/get-kind', (req, res) => {
         })
 })
 
-app.get('/get-angry', (req, res) => {
-    Cat
-        .find({type: "angry"})
+app.get('/get-pocket', (req, res) => {
+    Dosimeter
+        .find({type: "pocket"})
         .then((response) => {
             return res.send(JSON.stringify(response))
         })
@@ -133,9 +132,9 @@ app.get('/get-angry', (req, res) => {
         })
 })
 
-app.get('/get-sad', (req, res) => {
-    Cat
-        .find({type: "sad"})
+app.get('/get-portable', (req, res) => {
+    Dosimeter
+        .find({type: "portable"})
         .then((response) => {
             return res.send(JSON.stringify(response))
         })
