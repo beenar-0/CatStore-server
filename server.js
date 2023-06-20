@@ -49,8 +49,8 @@ app.get('/get-all', (req, res) => {
 })
 
 app.post('/add-dosimeter', (req, res) => {
-    const {name, description, price, type, img} = req.body
-    const post = new Dosimeter({name, description, price, type, img})
+    const {name, description, price, type, img, measurementRange, energyRange, protectionClass} = req.body
+    const post = new Dosimeter({name, description, price, type, img, measurementRange, energyRange, protectionClass})
     post
         .save()
         .then((result) => {
@@ -83,7 +83,10 @@ app.post('/edit-dosimeter', (req, res) => {
         description: post.description,
         price: post.price,
         img: post.img,
-        type: post.type
+        type: post.type,
+        measurementRange: post.measurementRange,
+        energyRange: post.energyRange,
+        protectionClass: post.protectionClass
     }, {new: true})
         .then((response) => {
             res.send(response)
@@ -135,6 +138,42 @@ app.get('/get-pocket', (req, res) => {
 app.get('/get-portable', (req, res) => {
     Dosimeter
         .find({type: "portable"})
+        .then((response) => {
+            return res.send(JSON.stringify(response))
+        })
+        .catch((error) => {
+            console.log(error)
+            return res.send(error)
+        })
+})
+
+app.get('/get-wideRange', (req, res) => {
+    Dosimeter
+        .find({type: "wideRange"})
+        .then((response) => {
+            return res.send(JSON.stringify(response))
+        })
+        .catch((error) => {
+            console.log(error)
+            return res.send(error)
+        })
+})
+
+app.get('/get-standard', (req, res) => {
+    Dosimeter
+        .find({type: "standard"})
+        .then((response) => {
+            return res.send(JSON.stringify(response))
+        })
+        .catch((error) => {
+            console.log(error)
+            return res.send(error)
+        })
+})
+
+app.get('/get-neutron', (req, res) => {
+    Dosimeter
+        .find({type: "neutron"})
         .then((response) => {
             return res.send(JSON.stringify(response))
         })

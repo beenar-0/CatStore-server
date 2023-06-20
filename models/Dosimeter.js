@@ -24,6 +24,18 @@ const postSchema = new Schema({
     type: {
         type: String,
         required: true
+    },
+    measurementRange: {
+        type: String,
+        required: true
+    },
+    energyRange: {
+        type: String,
+        required: true
+    },
+    protectionClass: {
+        type: String,
+        required: true
     }
 })
 
